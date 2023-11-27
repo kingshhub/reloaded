@@ -1,0 +1,6 @@
+node_modules
+oop.js
+.env
+test.rest
+*.rest
+*.http
