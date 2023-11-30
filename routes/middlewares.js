@@ -1,4 +1,3 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 function isUserLoggedIn(req, res, next) {
@@ -14,19 +13,24 @@ function isUserLoggedIn(req, res, next) {
   
     const tokenValue = val[1];
   
-    if(tokenType == "Bearer"){
-      const decoded = jwt.verify(tokenValue, process.env.secret);
+    if (tokenType.toLowerCase() === "bearer"){
+      const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET);
       req.decoded = decoded;
       next();
-      return;
+      
+    }
+
+    else{
+      res.status(401).send("not-authorised");
+
     }
   
-    res.status(401).send("not-authorised");
+    
   
   }
 
   function adminsOnly(req, res, next) {
-    if(req.decoded.role == "admin") {
+    if(req.decoded.role === "admin") {
       next();
     }
     else{

@@ -3,9 +3,10 @@ const router = express.Router();
 const { userCollection } = require("../schema/userSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const {isUserLoggedIn} = require("./middlewares");
 require("dotenv").config();
 const { validationResult } = require("express-validator");
-const {isUserLoggedIn} = require("./middlewares");
+
 
 require("dotenv").config(); // Load environment variables from .env file
 
@@ -35,20 +36,32 @@ router.post("/register", async (req, res) => {
 // User login route
 router.post("/login", async (req, res) => {
 
-  const {email, password} = req.body;
-
-  
-
   try {
-    const {userId} = req.decoded;
-    const user = await userCollection.findOne({ userId: "-password" });
-    res.send(user);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-;
+
+   const {email, password} = req.body;
+   console.log("Login request received with email:", email);
+
+   // Find user by email
+   const user = await userCollection.findOne({ email: email });
+   console.log("User found:", user);
+   if (!user) {
+     return res.status(404).json({ error: "User not found" });
+   }
+
+  // Check if decoded user ID is available
+    // if (!req.decoded || !req.decoded.userId) {
+    //   console.log("Decoded User ID not available");
+    //   return res.status(401).json({ error: "Unauthorized" });
+    // }
+    
+    
+// ;
+//compare password
     const passwordMatch = bcrypt.compareSync(password, user.password);
+    console.log("Password Match:", passwordMatch);
+
     if (!passwordMatch) {
+      console.log("Invalid credentials");
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
