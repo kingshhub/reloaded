@@ -7,7 +7,7 @@ const { adminsOnly, isUserLoggedIn } = require("./middlewares");
 require("dotenv").config();
 
 
-router.use(isUserLoggedIn);
+routes.use(isUserLoggedIn);
 
 routes.get("/", async (req, res) => {
   try {

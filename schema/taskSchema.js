@@ -8,6 +8,10 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    pictureName: {
+        type: String,
+        default: ""
+    },
     
     user: {
         type: mongoose.Schema.Types.ObjectId,
