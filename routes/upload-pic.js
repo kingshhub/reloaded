@@ -9,9 +9,11 @@ router.use(isUserLoggedIn);
 
 router.post("/pic", upload.single("file"), async (req, res) => {
     const {taskTitle, taskBody} = req.body;
-    const {fileName} = req.file;
+    const {fileName} = req.files[0];
+    console.log(req.file);
+    console.log(req.files[0]);
     
-    newTask = await taskCollection.create({
+    const newTask = await taskCollection.create({
         taskTitle, taskBody, pictureName, fileName
     });
     res.send({
