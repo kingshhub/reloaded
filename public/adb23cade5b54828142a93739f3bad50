@@ -1,0 +1,5 @@
+[curl -X POST http://localhost:4000/v1/upload-pic/pic \
+  -H "Content-Type: multipart/form-data; boundary=boundaryHere" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjY1NDY1Mjg3MGNkMGYxMjllZDZiN2UxOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzU5MjY3OH0.yPPBmVjMf_DjFz2_LD4WwpgX3DisJalxVKl4pMCAfEw" \
+  --data-binary @/Users/user/downloads/laptop-freelancer-works-home-office-programmer-freelancer-works-home-office-programmer-laptop-300700837.jpg
+]
